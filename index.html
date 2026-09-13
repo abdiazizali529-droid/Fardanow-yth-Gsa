@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A United Fardanow Family - Registration</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  *{box-sizing:border-box;font-family:system-ui,Inter,Arial}
+  body{margin:0;background:#0a0a0a;display:flex;justify-content:center;padding:16px;color:#fff}
+  .page{width:100%;max-width:560px}
+  .top{background:#111;border:1px solid #222;border-radius:24px;padding:24px;text-align:center}
+  .top h1{margin:0;font-size:22px;font-weight:900;letter-spacing:-.5px}
+  .top h1 b{color:#D4AF37}
+  .top p{margin:6px 0 0;color:#888;font-size:12px;letter-spacing:1px}
+  .card{background:#fff;color:#111;border-radius:22px;padding:22px;margin-top:14px}
+  label{font-size:11px;font-weight:800;color:#666;text-transform:uppercase}
+  input{width:100%;padding:14px 16px;border:1.5px solid #e5e7eb;background:#f9fafb;border-radius:12px;font-size:16px;margin:8px 0 14px;outline:none}
+  input:focus{background:#fff;border-color:#000}
+  .btn{width:100%;padding:14px;background:#111;color:#fff;border:0;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer}
+  .btn-excel{width:100%;padding:14px;background:#107C41;color:#fff;border:0;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;display:flex;justify-content:center;gap:8px;margin-top:10px}
+  .ok{display:none;background:#dcfce7;color:#166534;padding:10px;border-radius:10px;text-align:center;font-size:13px;font-weight:700;margin-top:10px}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  th{text-align:left;color:#999;font-size:10px;text-transform:uppercase;padding:10px 4px;border-bottom:1px solid #eee}
+  td{padding:10px 4px;border-bottom:1px solid #f5f5f5}
+  .search{width:100%;padding:11px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-size:13px;outline:none;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <h1>A UNITED <b>FARDANOW FAMILY</b></h1>
+    <p>REGISTRATION PORTAL</p>
+  </div>
+
+  <div class="card">
+    <label>Full Names</label>
+    <input id="names" placeholder="e.g. Ahmed Fardanow">
+    <label>Location</label>
+    <input id="location" placeholder="e.g. Nairobi, Eastleigh">
+    <button class="btn" onclick="register()">REGISTER</button>
+    <button class="btn-excel" onclick="exportExcel()">⬇ EXPORT TO EXCEL (.xlsx)</button>
+    <div id="ok" class="ok">✓ Registered</div>
+  </div>
+
+  <div class="card">
+    <input id="q" class="search" placeholder="Search...">
+    <div style="display:flex;justify-content:space-between;font-size:12px;color:#888"><b>Members: <span id="count">0</span></b><span onclick="clearAll()" style="text-decoration:underline;cursor:pointer">Clear</span></div>
+    <table><thead><tr><th>#</th><th>Names</th><th>Location</th></tr></thead><tbody id="tb"></tbody></table>
+  </div>
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem('fardanow_excel')||'[]');
+const tb=document.getElementById('tb'), count=document.getElementById('count'), q=document.getElementById('q'), ok=document.getElementById('ok');
+
+function render(){
+  let f = data.filter(d => (d.names+d.location).toLowerCase().includes(q.value.toLowerCase()));
+  count.textContent = data.length;
+  tb.innerHTML = f.map((r,i)=>`<tr><td>${i+1}</td><td><b>${r.names}</b><div style="font-size:10px;color:#999">${r.date}</div></td><td>${r.location}</td></tr>`).join('') || `<tr><td colspan=3 style="text-align:center;color:#999;padding:20px">No data</td></tr>`;
+}
+render();
+q.oninput=render;
+
+function register(){
+  let n=document.getElementById('names').value.trim();
+  let l=document.getElementById('location').value.trim();
+  if(!n||!l) return alert('Enter Names and Location');
+  data.unshift({names:n,location:l,date:new Date().toLocaleString()});
+  localStorage.setItem('fardanow_excel',JSON.stringify(data));
+  document.getElementById('names').value=''; document.getElementById('location').value='';
+  ok.style.display='block'; setTimeout(()=>ok.style.display='none',2000);
+  render();
+}
+
+function exportExcel(){
+  if(!data.length) return alert('No data to export yet');
+  // Create worksheet
+  const rows = data.map(d => ({ "Full Names": d.names, "Location": d.location, "Date Registered": d.date }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [{wch:25},{wch:25},{wch:22}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Fardanow Family");
+  XLSX.writeFile(wb, `Fardanow_Family_${new Date().toISOString().slice(0,10)}.xlsx`);
+}
+function clearAll(){ if(confirm('Delete all?')){ data=[]; localStorage.removeItem('fardanow_excel'); render(); } }
+</script>
+</body>
+  </html>
