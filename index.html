@@ -24,6 +24,9 @@
   th{text-align:left;color:#999;font-size:10px;text-transform:uppercase;padding:10px 4px;border-bottom:1px solid #eee}
   td{padding:10px 4px;border-bottom:1px solid #f5f5f5}
   .search{width:100%;padding:11px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-size:13px;outline:none;margin-bottom:8px}
+  .sort-row{display:flex;gap:8px;margin-bottom:10px}
+  .sort-btn{flex:1;padding:10px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-weight:800;font-size:12px;cursor:pointer}
+  .sort-btn.active{background:#111;color:#fff;border-color:#111}
 </style>
 </head>
 <body>
@@ -45,6 +48,11 @@
 
   <div class="card">
     <input id="q" class="search" placeholder="Search...">
+    <div class="sort-row">
+      <button id="btn-az" class="sort-btn active" onclick="setSort('az')">Sort A-Z</button>
+      <button id="btn-za" class="sort-btn" onclick="setSort('za')">Sort Z-A</button>
+      <button id="btn-new" class="sort-btn" onclick="setSort('new')">Newest</button>
+    </div>
     <div style="display:flex;justify-content:space-between;font-size:12px;color:#888"><b>Members: <span id="count">0</span></b><span onclick="clearAll()" style="text-decoration:underline;cursor:pointer">Clear</span></div>
     <table><thead><tr><th>#</th><th>Names</th><th>Location</th></tr></thead><tbody id="tb"></tbody></table>
   </div>
@@ -53,37 +61,27 @@
 <script>
 let data = JSON.parse(localStorage.getItem('fardanow_excel')||'[]');
 const tb=document.getElementById('tb'), count=document.getElementById('count'), q=document.getElementById('q'), ok=document.getElementById('ok');
+let sortMode = 'az'; // default A-Z
 
-function render(){
-  let f = data.filter(d => (d.names+d.location).toLowerCase().includes(q.value.toLowerCase()));
-  count.textContent = data.length;
-  tb.innerHTML = f.map((r,i)=>`<tr><td>${i+1}</td><td><b>${r.names}</b><div style="font-size:10px;color:#999">${r.date}</div></td><td>${r.location}</td></tr>`).join('') || `<tr><td colspan=3 style="text-align:center;color:#999;padding:20px">No data</td></tr>`;
-}
-render();
-q.oninput=render;
-
-function register(){
-  let n=document.getElementById('names').value.trim();
-  let l=document.getElementById('location').value.trim();
-  if(!n||!l) return alert('Enter Names and Location');
-  data.unshift({names:n,location:l,date:new Date().toLocaleString()});
-  localStorage.setItem('fardanow_excel',JSON.stringify(data));
-  document.getElementById('names').value=''; document.getElementById('location').value='';
-  ok.style.display='block'; setTimeout(()=>ok.style.display='none',2000);
+function setSort(mode){
+  sortMode = mode;
+  document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
+  if(mode==='az') document.getElementById('btn-az').classList.add('active');
+  if(mode==='za') document.getElementById('btn-za').classList.add('active');
+  if(mode==='new') document.getElementById('btn-new').classList.add('active');
   render();
 }
 
-function exportExcel(){
-  if(!data.length) return alert('No data to export yet');
-  // Create worksheet
-  const rows = data.map(d => ({ "Full Names": d.names, "Location": d.location, "Date Registered": d.date }));
-  const ws = XLSX.utils.json_to_sheet(rows);
-  ws['!cols'] = [{wch:25},{wch:25},{wch:22}];
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Fardanow Family");
-  XLSX.writeFile(wb, `Fardanow_Family_${new Date().toISOString().slice(0,10)}.xlsx`);
-}
-function clearAll(){ if(confirm('Delete all?')){ data=[]; localStorage.removeItem('fardanow_excel'); render(); } }
-</script>
-</body>
-  </html>
+function render(){
+  let f = data.filter(d => (d.names+d.location).toLowerCase().includes(q.value.toLowerCase()));
+  
+  // SORT LOGIC
+  if(sortMode === 'az'){
+    f.sort((a,b) => a.names.trim().localeCompare(b.names.trim()));
+  } else if(sortMode === 'za'){
+    f.sort((a,b) => b.names.trim().localeCompare(a.names.trim()));
+  }
+  // if 'new', keep original order (newest first because we unshift)
+
+  count.textContent = data.length;
+  tb.innerHTML
