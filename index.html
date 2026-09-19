@@ -3,123 +3,1885 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A United Fardanow Family - Registration</title>
+<meta name="theme-color" content="#08090b">
+
+<title>A United Fardanow Family — Registration</title>
+
+<!-- Excel Export Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <style>
-  *{box-sizing:border-box;font-family:system-ui,Inter,Arial}
-  body{margin:0;background:#0a0a0a;display:flex;justify-content:center;padding:16px;color:#fff;min-height:100vh}
-  .page{width:100%;max-width:560px}
-  .top{background:#111;border:1px solid #222;border-radius:24px;padding:24px;text-align:center}
-  .top h1{margin:0;font-size:22px;font-weight:900;letter-spacing:-.5px}
-  .top h1 b{color:#D4AF37}
-  .top p{margin:6px 0 0;color:#888;font-size:12px;letter-spacing:1px}
-  .card{background:#fff;color:#111;border-radius:22px;padding:22px;margin-top:14px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-  label{font-size:11px;font-weight:800;color:#666;text-transform:uppercase;letter-spacing:.5px}
-  input{width:100%;padding:14px 16px;border:1.5px solid #e5e7eb;background:#f9fafb;border-radius:12px;font-size:16px;margin:8px 0 14px;outline:none;transition:.2s}
-  input:focus{background:#fff;border-color:#000}
-  .btn{width:100%;padding:14px;background:#111;color:#fff;border:0;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer}
-  .btn:active{transform:scale(.98)}
-  .btn-excel{width:100%;padding:14px;background:#107C41;color:#fff;border:0;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;display:flex;justify-content:center;gap:8px;margin-top:10px}
-  .ok{display:none;background:#dcfce7;color:#166534;padding:10px;border-radius:10px;text-align:center;font-size:13px;font-weight:700;margin-top:12px}
-  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
-  th{text-align:left;color:#999;font-size:10px;text-transform:uppercase;padding:10px 4px;border-bottom:1px solid #eee}
-  td{padding:12px 4px;border-bottom:1px solid #f5f5f5}
-  .search{width:100%;padding:11px 14px;border-radius:10px;border:1px solid #e5e7eb;background:#f9fafb;font-size:13px;outline:none;margin-bottom:10px}
-  .meta{font-size:10px;color:#999;margin-top:2px}
-  .footer{text-align:center;color:#555;font-size:11px;margin-top:18px}
-</style>
-</head>
-<body>
-<div class="page">
-  <div class="top">
-    <h1>A UNITED <b>FARDANOW FAMILY</b></h1>
-    <p>REGISTRATION PORTAL • Automatic A-Z</p>
-  </div>
-
-  <div class="card">
-    <label>Full Names</label>
-    <input id="names" placeholder="e.g. Ahmed Fardanow" autocomplete="name">
-    <label>Location</label>
-    <input id="location" placeholder="e.g. Nairobi, Eastleigh">
-    <button class="btn" onclick="register()">REGISTER</button>
-    <button class="btn-excel" onclick="exportExcel()">⬇ EXPORT TO EXCEL</button>
-    <div id="ok" class="ok">✓ Registered Successfully</div>
-  </div>
-
-  <div class="card">
-    <input id="q" class="search" placeholder="Search name or location...">
-    <div style="display:flex;justify-content:space-between;font-size:12px;color:#888">
-      <b>Members: <span id="count">0</span></b>
-      <span onclick="clearAll()" style="text-decoration:underline;cursor:pointer">Clear All</span>
-    </div>
-    <table>
-      <thead><tr><th>#</th><th>Names</th><th>Location</th></tr></thead>
-      <tbody id="tb"></tbody>
-    </table>
-  </div>
-
-  <div class="footer">Fardanow Family © 2026</div>
-</div>
-
-<script>
-let data = JSON.parse(localStorage.getItem('fardanow_excel')||'[]');
-const tb = document.getElementById('tb');
-const count = document.getElementById('count');
-const q = document.getElementById('q');
-const ok = document.getElementById('ok');
-
-function getSorted(list){
-  return [...list].sort((a,b) => 
-    a.names.trim().toLowerCase().localeCompare(b.names.trim().toLowerCase())
-  );
+:root{
+  --bg:#08090b;
+  --panel:#111318;
+  --panel2:#17191f;
+  --line:#292c34;
+  --gold:#d4af37;
+  --gold2:#f0d878;
+  --text:#f8fafc;
+  --muted:#9ca3af;
+  --green:#22c55e;
+  --danger:#ef4444;
 }
 
-function render(){
-  let filtered = data.filter(d => 
-    (d.names + " " + d.location).toLowerCase().includes(q.value.toLowerCase())
-  );
-  let sorted = getSorted(filtered);
-
-  count.textContent = data.length;
-  tb.innerHTML = sorted.map((r,i)=>
-    `<tr><td>${i+1}</td><td><b>${r.names}</b><div class="meta">${r.date}</div></td><td>${r.location}</td></tr>`
-  ).join('') || `<tr><td colspan=3 style="text-align:center;color:#999;padding:24px">No members yet</td></tr>`;
+*{
+  box-sizing:border-box;
 }
 
-render();
-q.oninput = render;
-
-function register(){
-  let n = document.getElementById('names').value.trim();
-  let l = document.getElementById('location').value.trim();
-  if(!n || !l) return alert('Please enter Names and Location');
-  
-  data.push({names:n, location:l, date:new Date().toLocaleString()});
-  localStorage.setItem('fardanow_excel', JSON.stringify(data));
-  
-  document.getElementById('names').value='';
-  document.getElementById('location').value='';
-  ok.style.display='block';
-  setTimeout(()=> ok.style.display='none', 2000);
-  render();
+html{
+  scroll-behavior:smooth;
 }
 
-function exportExcel(){
-  if(!data.length) return alert('No data to export yet');
-  let sorted = getSorted(data);
-  const rows = sorted.map(d => ({ "Full Names": d.names, "Location": d.location, "Date Registered": d.date }));
-  const ws = XLSX.utils.json_to_sheet(rows);
-  ws['!cols'] = [{wch:28},{wch:25},{wch:22}];
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Fardanow Family");
-  XLSX.writeFile(wb, `Fardanow_Family_A-Z_${new Date().toISOString().slice(0,10)}.xlsx`);
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(212,175,55,.13),
+      transparent 35%
+    ),
+    var(--bg);
+  color:var(--text);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
-function clearAll(){
-  if(confirm('Delete all members? This cannot be undone.')){
-    data=[]; localStorage.removeItem('fardanow_excel'); render();
+button,
+input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.page{
+  width:min(100% - 24px,760px);
+  margin:0 auto;
+  padding:18px 0 35px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:30px 22px 26px;
+  text-align:center;
+
+  border:1px solid var(--line);
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #121318,
+      #0e0f12
+    );
+
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.35);
+}
+
+.hero:before{
+  content:"";
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  border-radius:50%;
+
+  background:rgba(212,175,55,.08);
+
+  filter:blur(35px);
+
+  left:50%;
+  top:-130px;
+
+  transform:translateX(-50%);
+}
+
+.badge{
+  position:relative;
+
+  display:inline-flex;
+
+  padding:6px 11px;
+
+  border:1px solid rgba(212,175,55,.35);
+
+  border-radius:999px;
+
+  color:var(--gold2);
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:1.4px;
+
+  text-transform:uppercase;
+}
+
+.hero h1{
+  position:relative;
+
+  margin:13px 0 7px;
+
+  font-size:
+    clamp(24px,6vw,38px);
+
+  line-height:1.05;
+
+  letter-spacing:-1px;
+}
+
+.hero h1 span{
+  color:var(--gold);
+}
+
+.hero p{
+  position:relative;
+
+  margin:0;
+
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card{
+  margin-top:15px;
+
+  padding:21px;
+
+  border:1px solid var(--line);
+
+  border-radius:23px;
+
+  background:
+    rgba(17,19,24,.94);
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,.22);
+}
+
+.section-head{
+  display:flex;
+
+  justify-content:space-between;
+  align-items:center;
+
+  gap:12px;
+
+  margin-bottom:17px;
+}
+
+.section-head h2{
+  margin:0;
+
+  font-size:16px;
+}
+
+.section-head p{
+  margin:4px 0 0;
+
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:13px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+label{
+  display:block;
+
+  margin-bottom:7px;
+
+  color:#c7cbd3;
+
+  font-size:10px;
+
+  font-weight:800;
+
+  text-transform:uppercase;
+
+  letter-spacing:.8px;
+}
+
+input{
+  width:100%;
+
+  padding:13px 14px;
+
+  color:#fff;
+
+  background:#0c0e12;
+
+  border:1px solid #30333b;
+
+  border-radius:12px;
+
+  outline:none;
+
+  transition:.2s;
+}
+
+input::placeholder{
+  color:#646a75;
+}
+
+input:focus{
+  border-color:var(--gold);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(212,175,55,.08);
+}
+
+.actions{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+
+  margin-top:15px;
+}
+
+.btn{
+  border:0;
+
+  border-radius:12px;
+
+  padding:13px 15px;
+
+  font-weight:800;
+
+  font-size:13px;
+}
+
+.primary{
+  color:#08090b;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold2),
+      var(--gold)
+    );
+}
+
+.secondary{
+  color:#fff;
+
+  background:#22252c;
+
+  border:1px solid #343740;
+}
+
+.btn:disabled{
+  opacity:.55;
+
+  cursor:not-allowed;
+}
+
+.hidden{
+  display:none!important;
+}
+
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+.notice{
+  display:none;
+
+  margin-top:13px;
+
+  padding:11px 13px;
+
+  border-radius:11px;
+
+  font-size:12px;
+
+  font-weight:700;
+}
+
+.notice.success{
+  display:block;
+
+  background:
+    rgba(34,197,94,.12);
+
+  color:#86efac;
+
+  border:
+    1px solid
+    rgba(34,197,94,.2);
+}
+
+.notice.error{
+  display:block;
+
+  background:
+    rgba(239,68,68,.10);
+
+  color:#fca5a5;
+
+  border:
+    1px solid
+    rgba(239,68,68,.2);
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+
+  margin-bottom:14px;
+}
+
+.stat{
+  padding:13px;
+
+  border:1px solid var(--line);
+
+  border-radius:14px;
+
+  background:#0d0f13;
+}
+
+.stat small{
+  display:block;
+
+  color:var(--muted);
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+}
+
+.stat strong{
+  display:block;
+
+  margin-top:3px;
+
+  font-size:20px;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.toolbar{
+  display:flex;
+
+  gap:9px;
+
+  margin-bottom:12px;
+}
+
+.search{
+  flex:1;
+}
+
+.sort-btn{
+  white-space:nowrap;
+
+  padding:0 13px;
+
+  color:#ddd;
+
+  background:#22252c;
+
+  border:1px solid #343740;
+
+  border-radius:12px;
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  overflow:auto;
+
+  border:1px solid var(--line);
+
+  border-radius:15px;
+}
+
+table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  min-width:620px;
+}
+
+th{
+  padding:12px 10px;
+
+  color:#8e949f;
+
+  background:#0d0f13;
+
+  font-size:10px;
+
+  text-transform:uppercase;
+
+  letter-spacing:.7px;
+
+  text-align:left;
+}
+
+td{
+  padding:13px 10px;
+
+  border-top:1px solid #20232a;
+
+  font-size:13px;
+
+  vertical-align:middle;
+}
+
+.name{
+  font-weight:800;
+}
+
+.sub{
+  margin-top:3px;
+
+  color:#777d88;
+
+  font-size:10px;
+}
+
+.phone{
+  color:#d9dde5;
+}
+
+.edit{
+  padding:7px 10px;
+
+  color:#111;
+
+  background:var(--gold2);
+
+  border:0;
+
+  border-radius:8px;
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+.empty{
+  padding:28px 15px;
+
+  color:#777d88;
+
+  text-align:center;
+
+  font-size:12px;
+}
+
+.loading{
+  opacity:.6;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  margin-top:18px;
+
+  color:#555b66;
+
+  text-align:center;
+
+  font-size:10px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+  .page{
+    width:min(100% - 16px,760px);
+
+    padding-top:10px;
+  }
+
+  .hero{
+    border-radius:22px;
+
+    padding:25px 15px;
+  }
+
+  .card{
+    padding:16px;
+
+    border-radius:19px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+  .toolbar{
+    flex-direction:column;
+  }
+
+  .sort-btn{
+    height:44px;
   }
 }
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="hero">
+
+  <div class="badge">
+    Official Family Registration Portal
+  </div>
+
+  <h1>
+    A UNITED
+    <span>FARDANOW FAMILY</span>
+  </h1>
+
+  <p>
+    One family • One connection • One future
+  </p>
+
+</header>
+
+
+
+<!-- =========================
+     REGISTRATION FORM
+========================= -->
+
+<section class="card">
+
+  <div class="section-head">
+
+    <div>
+
+      <h2 id="formTitle">
+        Register Member
+      </h2>
+
+      <p>
+        Add a family member to the online register.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <!-- NAME -->
+
+    <div class="field">
+
+      <label for="names">
+        Full Names
+      </label>
+
+      <input
+        id="names"
+        type="text"
+        placeholder="e.g. Ahmed Fardanow"
+        autocomplete="name"
+      >
+
+    </div>
+
+
+    <!-- PHONE -->
+
+    <div class="field">
+
+      <label for="phone">
+        Members Phone
+      </label>
+
+      <input
+        id="phone"
+        type="tel"
+        placeholder="e.g. 0712 345 678"
+        autocomplete="tel"
+      >
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="field full">
+
+      <label for="location">
+        Location
+      </label>
+
+      <input
+        id="location"
+        type="text"
+        placeholder="e.g. Garissa Township, Nairobi, Mombasa"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <div class="actions">
+
+    <button
+      class="btn primary"
+      id="saveBtn"
+      onclick="saveMember()"
+    >
+      REGISTER MEMBER
+    </button>
+
+
+    <button
+      class="btn secondary hidden"
+      id="cancelBtn"
+      onclick="cancelEdit()"
+    >
+      CANCEL EDIT
+    </button>
+
+  </div>
+
+
+  <div
+    id="notice"
+    class="notice"
+  ></div>
+
+</section>
+
+
+
+<!-- =========================
+     MEMBERS
+========================= -->
+
+<section class="card">
+
+
+  <div class="section-head">
+
+    <div>
+
+      <h2>
+        Family Members
+      </h2>
+
+      <p>
+        Live online register • Automatic A–Z sorting
+      </p>
+
+    </div>
+
+
+    <button
+      class="btn secondary"
+      style="padding:9px 11px"
+      onclick="exportExcel()"
+    >
+      EXCEL
+    </button>
+
+  </div>
+
+
+
+  <!-- STATISTICS -->
+
+  <div class="stats">
+
+
+    <div class="stat">
+
+      <small>
+        Total Members
+      </small>
+
+      <strong id="count">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <small>
+        Showing
+      </small>
+
+      <strong id="shown">
+        0
+      </strong>
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- SEARCH + SORT -->
+
+  <div class="toolbar">
+
+    <input
+      id="q"
+      class="search"
+      type="search"
+      placeholder="Search name, phone or location..."
+    >
+
+
+    <button
+      id="sortBtn"
+      class="sort-btn"
+      onclick="toggleSort()"
+    >
+      A–Z ↑
+    </button>
+
+  </div>
+
+
+
+  <!-- TABLE -->
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            #
+          </th>
+
+          <th>
+            Full Names
+          </th>
+
+          <th>
+            Phone
+          </th>
+
+          <th>
+            Location
+          </th>
+
+          <th>
+            Action
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="tb">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+<div class="footer">
+
+  A United Fardanow Family © 2026
+  • Online Registration Portal
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* ==========================================================
+   SUPABASE DATABASE CONFIGURATION
+
+   STEP 1:
+   Create your Supabase project.
+
+   STEP 2:
+   Create a table called:
+
+   fardanow_members
+
+   STEP 3:
+   Put your details below.
+========================================================== */
+
+
+const SUPABASE_URL =
+"PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
+
+
+const SUPABASE_ANON_KEY =
+"PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
+
+
+const TABLE =
+"fardanow_members";
+
+
+/* ==========================================================
+   APPLICATION VARIABLES
+========================================================== */
+
+let data = [];
+
+let editingId = null;
+
+let sortAscending = true;
+
+
+/* ==========================================================
+   ELEMENTS
+========================================================== */
+
+const namesEl =
+document.getElementById("names");
+
+const phoneEl =
+document.getElementById("phone");
+
+const locationEl =
+document.getElementById("location");
+
+const qEl =
+document.getElementById("q");
+
+const tb =
+document.getElementById("tb");
+
+const countEl =
+document.getElementById("count");
+
+const shownEl =
+document.getElementById("shown");
+
+const noticeEl =
+document.getElementById("notice");
+
+const saveBtn =
+document.getElementById("saveBtn");
+
+const cancelBtn =
+document.getElementById("cancelBtn");
+
+const formTitle =
+document.getElementById("formTitle");
+
+const sortBtn =
+document.getElementById("sortBtn");
+
+
+/* ==========================================================
+   CHECK DATABASE CONFIGURATION
+========================================================== */
+
+function configured(){
+
+  return (
+    !SUPABASE_URL.includes("PASTE_YOUR") &&
+    !SUPABASE_ANON_KEY.includes("PASTE_YOUR")
+  );
+
+}
+
+
+/* ==========================================================
+   DATABASE HEADERS
+========================================================== */
+
+function headers(){
+
+  return {
+
+    "apikey":
+      SUPABASE_ANON_KEY,
+
+    "Authorization":
+      "Bearer " + SUPABASE_ANON_KEY,
+
+    "Content-Type":
+      "application/json",
+
+    "Prefer":
+      "return=representation"
+
+  };
+
+}
+
+
+/* ==========================================================
+   NOTIFICATION
+========================================================== */
+
+function showNotice(
+  message,
+  type="success"
+){
+
+  noticeEl.textContent =
+    message;
+
+  noticeEl.className =
+    "notice " + type;
+
+  clearTimeout(
+    window.noticeTimer
+  );
+
+  window.noticeTimer =
+    setTimeout(
+      ()=>{
+        noticeEl.className =
+          "notice";
+      },
+      3500
+    );
+
+}
+
+
+/* ==========================================================
+   SECURITY: ESCAPE HTML
+========================================================== */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(
+      /[&<>"']/g,
+      c => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[c])
+    );
+
+}
+
+
+/* ==========================================================
+   NORMALIZE SEARCH
+========================================================== */
+
+function normalize(value){
+
+  return String(value ?? "")
+    .trim()
+    .toLocaleLowerCase();
+
+}
+
+
+/* ==========================================================
+   A-Z SORTING
+========================================================== */
+
+function getSorted(list){
+
+  return [...list].sort(
+    (a,b)=>{
+
+      const result =
+        normalize(a.full_name)
+        .localeCompare(
+          normalize(b.full_name),
+          undefined,
+          {
+            numeric:true,
+            sensitivity:"base"
+          }
+        );
+
+
+      if(result !== 0){
+
+        return sortAscending
+          ? result
+          : -result;
+
+      }
+
+
+      const secondary =
+        normalize(a.location)
+        .localeCompare(
+          normalize(b.location),
+          undefined,
+          {
+            numeric:true,
+            sensitivity:"base"
+          }
+        );
+
+
+      return sortAscending
+        ? secondary
+        : -secondary;
+
+    }
+  );
+
+}
+
+
+/* ==========================================================
+   SEARCH FILTER
+========================================================== */
+
+function filteredData(){
+
+  const term =
+    normalize(qEl.value);
+
+
+  if(!term){
+
+    return getSorted(data);
+
+  }
+
+
+  return getSorted(
+
+    data.filter(
+      member =>
+
+        normalize(
+          member.full_name
+        ).includes(term)
+
+        ||
+
+        normalize(
+          member.phone
+        ).includes(term)
+
+        ||
+
+        normalize(
+          member.location
+        ).includes(term)
+
+    )
+
+  );
+
+}
+
+
+/* ==========================================================
+   RENDER MEMBERS
+========================================================== */
+
+function render(){
+
+  const rows =
+    filteredData();
+
+
+  countEl.textContent =
+    data.length;
+
+
+  shownEl.textContent =
+    rows.length;
+
+
+  if(!rows.length){
+
+    tb.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="5"
+          class="empty"
+        >
+
+          ${
+            data.length
+              ? "No matching members found."
+              : "No members registered yet."
+          }
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  tb.innerHTML =
+
+    rows.map(
+      (member,index)=>`
+
+        <tr>
+
+          <td>
+            ${index + 1}
+          </td>
+
+
+          <td>
+
+            <div class="name">
+
+              ${escapeHTML(
+                member.full_name
+              )}
+
+            </div>
+
+
+            <div class="sub">
+
+              ${
+                member.registered_at
+                ?
+                new Date(
+                  member.registered_at
+                ).toLocaleString()
+                :
+                ""
+              }
+
+            </div>
+
+          </td>
+
+
+          <td class="phone">
+
+            ${escapeHTML(
+              member.phone || "—"
+            )}
+
+          </td>
+
+
+          <td>
+
+            ${escapeHTML(
+              member.location
+            )}
+
+          </td>
+
+
+          <td>
+
+            <button
+              class="edit"
+              onclick="startEdit('${member.id}')"
+            >
+
+              EDIT
+
+            </button>
+
+          </td>
+
+        </tr>
+
+      `
+    ).join("");
+
+}
+
+
+/* ==========================================================
+   LOAD MEMBERS FROM ONLINE DATABASE
+========================================================== */
+
+async function loadMembers(){
+
+  if(!configured()){
+
+    tb.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="5"
+          class="empty"
+        >
+
+          Connect Supabase first by adding
+          your Project URL and anon/public key
+          in this HTML.
+
+        </td>
+
+      </tr>
+
+    `;
+
+
+    countEl.textContent =
+      "—";
+
+    shownEl.textContent =
+      "—";
+
+    return;
+
+  }
+
+
+  tb.innerHTML = `
+
+    <tr>
+
+      <td
+        colspan="5"
+        class="empty loading"
+      >
+
+        Loading live family register...
+
+      </td>
+
+    </tr>
+
+  `;
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        `${SUPABASE_URL}/rest/v1/${TABLE}?select=id,full_name,phone,location,registered_at,updated_at&order=full_name.asc`,
+
+        {
+          headers:
+            headers()
+        }
+
+      );
+
+
+    if(!response.ok){
+
+      const errorText =
+        await response.text();
+
+      throw new Error(
+        errorText ||
+        "Unable to load members."
+      );
+
+    }
+
+
+    data =
+      await response.json();
+
+
+    render();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+
+    tb.innerHTML = `
+
+      <tr>
+
+        <td
+          colspan="5"
+          class="empty"
+        >
+
+          Unable to connect to the
+          online database.
+
+          <br><br>
+
+          Check your Supabase configuration.
+
+        </td>
+
+      </tr>
+
+    `;
+
+
+    showNotice(
+      "Database connection failed. Check your Supabase settings.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* ==========================================================
+   REGISTER OR UPDATE MEMBER
+========================================================== */
+
+async function saveMember(){
+
+  if(!configured()){
+
+    showNotice(
+      "First connect this page to Supabase.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const full_name =
+    namesEl.value.trim();
+
+
+  const phone =
+    phoneEl.value.trim();
+
+
+  const location =
+    locationEl.value.trim();
+
+
+  if(
+    !full_name ||
+    !phone ||
+    !location
+  ){
+
+    showNotice(
+      "Please enter full names, phone number and location.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  saveBtn.disabled =
+    true;
+
+
+  saveBtn.textContent =
+    editingId
+      ? "SAVING..."
+      : "REGISTERING...";
+
+
+  try{
+
+    let response;
+
+
+    /* ======================
+       EDIT EXISTING MEMBER
+    ====================== */
+
+    if(editingId){
+
+      response =
+        await fetch(
+
+          `${SUPABASE_URL}/rest/v1/${TABLE}?id=eq.${encodeURIComponent(editingId)}`,
+
+          {
+
+            method:"PATCH",
+
+            headers:
+              headers(),
+
+            body:
+              JSON.stringify({
+
+                full_name,
+                phone,
+                location,
+
+                updated_at:
+                  new Date()
+                  .toISOString()
+
+              })
+
+          }
+
+        );
+
+    }
+
+
+    /* ======================
+       REGISTER NEW MEMBER
+    ====================== */
+
+    else{
+
+      response =
+        await fetch(
+
+          `${SUPABASE_URL}/rest/v1/${TABLE}`,
+
+          {
+
+            method:"POST",
+
+            headers:
+              headers(),
+
+            body:
+              JSON.stringify({
+
+                full_name,
+                phone,
+                location
+
+              })
+
+          }
+
+        );
+
+    }
+
+
+    if(!response.ok){
+
+      const errorText =
+        await response.text();
+
+      throw new Error(
+        errorText ||
+        "Database request failed."
+      );
+
+    }
+
+
+    showNotice(
+
+      editingId
+        ?
+        "Member updated successfully."
+        :
+        "Member registered successfully."
+
+    );
+
+
+    clearForm();
+
+
+    await loadMembers();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+
+    showNotice(
+      "Could not save the member. Please try again.",
+      "error"
+    );
+
+  }
+
+  finally{
+
+    saveBtn.disabled =
+      false;
+
+    saveBtn.textContent =
+      editingId
+        ? "SAVE CHANGES"
+        : "REGISTER MEMBER";
+
+  }
+
+}
+
+
+/* ==========================================================
+   EDIT MEMBER
+========================================================== */
+
+function startEdit(id){
+
+  const member =
+    data.find(
+      item => item.id === id
+    );
+
+
+  if(!member){
+
+    return;
+
+  }
+
+
+  editingId =
+    id;
+
+
+  namesEl.value =
+    member.full_name || "";
+
+
+  phoneEl.value =
+    member.phone || "";
+
+
+  locationEl.value =
+    member.location || "";
+
+
+  formTitle.textContent =
+    "Edit Member";
+
+
+  saveBtn.textContent =
+    "SAVE CHANGES";
+
+
+  cancelBtn.classList
+    .remove("hidden");
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+
+  namesEl.focus();
+
+}
+
+
+/* ==========================================================
+   CANCEL EDIT
+========================================================== */
+
+function cancelEdit(){
+
+  clearForm();
+
+  showNotice(
+    "Edit cancelled."
+  );
+
+}
+
+
+/* ==========================================================
+   CLEAR FORM
+========================================================== */
+
+function clearForm(){
+
+  editingId =
+    null;
+
+
+  namesEl.value =
+    "";
+
+
+  phoneEl.value =
+    "";
+
+
+  locationEl.value =
+    "";
+
+
+  formTitle.textContent =
+    "Register Member";
+
+
+  saveBtn.textContent =
+    "REGISTER MEMBER";
+
+
+  cancelBtn.classList
+    .add("hidden");
+
+}
+
+
+/* ==========================================================
+   TOGGLE A-Z / Z-A
+========================================================== */
+
+function toggleSort(){
+
+  sortAscending =
+    !sortAscending;
+
+
+  sortBtn.textContent =
+    sortAscending
+      ? "A–Z ↑"
+      : "Z–A ↓";
+
+
+  render();
+
+}
+
+
+/* ==========================================================
+   SEARCH
+========================================================== */
+
+qEl.addEventListener(
+  "input",
+  render
+);
+
+
+/* ==========================================================
+   EXPORT TO EXCEL
+========================================================== */
+
+function exportExcel(){
+
+  if(!data.length){
+
+    showNotice(
+      "There are no members to export.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const sorted =
+    getSorted(data);
+
+
+  const rows =
+    sorted.map(
+      (member,index)=>({
+
+        "No.":
+          index + 1,
+
+        "Full Names":
+          member.full_name,
+
+        "Phone":
+          member.phone,
+
+        "Location":
+          member.location,
+
+        "Date Registered":
+          member.registered_at
+            ?
+            new Date(
+              member.registered_at
+            ).toLocaleString()
+            :
+            ""
+
+      })
+    );
+
+
+  const worksheet =
+    XLSX.utils.json_to_sheet(
+      rows
+    );
+
+
+  worksheet["!cols"] = [
+
+    {wch:8},
+
+    {wch:30},
+
+    {wch:20},
+
+    {wch:30},
+
+    {wch:25}
+
+  ];
+
+
+  const workbook =
+    XLSX.utils.book_new();
+
+
+  XLSX.utils.book_append_sheet(
+
+    workbook,
+
+    worksheet,
+
+    "Fardanow Family"
+
+  );
+
+
+  const today =
+    new Date()
+      .toISOString()
+      .slice(0,10);
+
+
+  XLSX.writeFile(
+
+    workbook,
+
+    `Fardanow_Family_Register_A-Z_${today}.xlsx`
+
+  );
+
+}
+
+
+/* ==========================================================
+   START APPLICATION
+========================================================== */
+
+loadMembers();
+
 </script>
+
 </body>
 </html>
