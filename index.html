@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,6 @@
 
 <title>A United Fardanow Family — Registration</title>
 
-<!-- Excel Export Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 <style>
@@ -24,43 +24,22 @@
   --danger:#ef4444;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
   min-height:100vh;
   background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(212,175,55,.13),
-      transparent 35%
-    ),
+    radial-gradient(circle at 50% -10%,rgba(212,175,55,.13),transparent 35%),
     var(--bg);
   color:var(--text);
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 }
 
-button,
-input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
+button,input{font:inherit}
+button{cursor:pointer}
 
 .page{
   width:min(100% - 24px,760px);
@@ -68,516 +47,315 @@ button{
   padding:18px 0 35px;
 }
 
-
-/* =========================
-   HERO
-========================= */
-
+/* HERO */
 .hero{
   position:relative;
   overflow:hidden;
   padding:30px 22px 26px;
   text-align:center;
-
   border:1px solid var(--line);
   border-radius:28px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #121318,
-      #0e0f12
-    );
-
-  box-shadow:
-    0 20px 55px rgba(0,0,0,.35);
+  background:linear-gradient(145deg,#121318,#0e0f12);
+  box-shadow:0 20px 55px rgba(0,0,0,.35);
 }
 
 .hero:before{
   content:"";
   position:absolute;
-
   width:220px;
   height:220px;
-
   border-radius:50%;
-
   background:rgba(212,175,55,.08);
-
   filter:blur(35px);
-
   left:50%;
   top:-130px;
-
   transform:translateX(-50%);
 }
 
 .badge{
   position:relative;
-
   display:inline-flex;
-
   padding:6px 11px;
-
   border:1px solid rgba(212,175,55,.35);
-
   border-radius:999px;
-
   color:var(--gold2);
-
   font-size:10px;
   font-weight:800;
-
   letter-spacing:1.4px;
-
   text-transform:uppercase;
 }
 
 .hero h1{
   position:relative;
-
   margin:13px 0 7px;
-
-  font-size:
-    clamp(24px,6vw,38px);
-
+  font-size:clamp(24px,6vw,38px);
   line-height:1.05;
-
   letter-spacing:-1px;
 }
 
-.hero h1 span{
-  color:var(--gold);
-}
+.hero h1 span{color:var(--gold)}
 
 .hero p{
   position:relative;
-
   margin:0;
-
   color:var(--muted);
-
   font-size:13px;
 }
 
-
-/* =========================
-   CARDS
-========================= */
-
+/* CARDS */
 .card{
   margin-top:15px;
-
   padding:21px;
-
   border:1px solid var(--line);
-
   border-radius:23px;
-
-  background:
-    rgba(17,19,24,.94);
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.22);
+  background:rgba(17,19,24,.94);
+  box-shadow:0 12px 35px rgba(0,0,0,.22);
 }
 
 .section-head{
   display:flex;
-
   justify-content:space-between;
   align-items:center;
-
   gap:12px;
-
   margin-bottom:17px;
 }
 
 .section-head h2{
   margin:0;
-
   font-size:16px;
 }
 
 .section-head p{
   margin:4px 0 0;
-
   color:var(--muted);
-
   font-size:11px;
 }
 
-
-/* =========================
-   FORM
-========================= */
-
+/* FORM */
 .form-grid{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:13px;
 }
 
-.field.full{
-  grid-column:1/-1;
-}
+.field.full{grid-column:1/-1}
 
 label{
   display:block;
-
   margin-bottom:7px;
-
   color:#c7cbd3;
-
   font-size:10px;
-
   font-weight:800;
-
   text-transform:uppercase;
-
   letter-spacing:.8px;
 }
 
 input{
   width:100%;
-
   padding:13px 14px;
-
   color:#fff;
-
   background:#0c0e12;
-
   border:1px solid #30333b;
-
   border-radius:12px;
-
   outline:none;
-
   transition:.2s;
 }
 
-input::placeholder{
-  color:#646a75;
-}
+input::placeholder{color:#646a75}
 
 input:focus{
   border-color:var(--gold);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(212,175,55,.08);
+  box-shadow:0 0 0 3px rgba(212,175,55,.08);
 }
 
 .actions{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
-
   margin-top:15px;
 }
 
 .btn{
   border:0;
-
   border-radius:12px;
-
   padding:13px 15px;
-
   font-weight:800;
-
   font-size:13px;
 }
 
 .primary{
   color:#08090b;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold2),
-      var(--gold)
-    );
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
 }
 
 .secondary{
   color:#fff;
-
   background:#22252c;
-
   border:1px solid #343740;
 }
 
 .btn:disabled{
   opacity:.55;
-
   cursor:not-allowed;
 }
 
-.hidden{
-  display:none!important;
-}
+.hidden{display:none!important}
 
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
+/* NOTICES */
 .notice{
   display:none;
-
   margin-top:13px;
-
   padding:11px 13px;
-
   border-radius:11px;
-
   font-size:12px;
-
   font-weight:700;
 }
 
 .notice.success{
   display:block;
-
-  background:
-    rgba(34,197,94,.12);
-
+  background:rgba(34,197,94,.12);
   color:#86efac;
-
-  border:
-    1px solid
-    rgba(34,197,94,.2);
+  border:1px solid rgba(34,197,94,.2);
 }
 
 .notice.error{
   display:block;
-
-  background:
-    rgba(239,68,68,.10);
-
+  background:rgba(239,68,68,.10);
   color:#fca5a5;
-
-  border:
-    1px solid
-    rgba(239,68,68,.2);
+  border:1px solid rgba(239,68,68,.2);
 }
 
-
-/* =========================
-   STATISTICS
-========================= */
-
+/* STATS */
 .stats{
   display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
+  grid-template-columns:1fr 1fr;
   gap:10px;
-
   margin-bottom:14px;
 }
 
 .stat{
   padding:13px;
-
   border:1px solid var(--line);
-
   border-radius:14px;
-
   background:#0d0f13;
 }
 
 .stat small{
   display:block;
-
   color:var(--muted);
-
   font-size:10px;
-
   text-transform:uppercase;
-
   letter-spacing:.7px;
 }
 
 .stat strong{
   display:block;
-
   margin-top:3px;
-
   font-size:20px;
 }
 
-
-/* =========================
-   SEARCH
-========================= */
-
+/* SEARCH */
 .toolbar{
   display:flex;
-
   gap:9px;
-
   margin-bottom:12px;
 }
 
-.search{
-  flex:1;
-}
+.search{flex:1}
 
 .sort-btn{
   white-space:nowrap;
-
   padding:0 13px;
-
   color:#ddd;
-
   background:#22252c;
-
   border:1px solid #343740;
-
   border-radius:12px;
-
   font-size:12px;
-
   font-weight:800;
 }
 
-
-/* =========================
-   TABLE
-========================= */
-
+/* TABLE */
 .table-wrap{
   overflow:auto;
-
   border:1px solid var(--line);
-
   border-radius:15px;
 }
 
 table{
   width:100%;
-
   border-collapse:collapse;
-
   min-width:620px;
 }
 
 th{
   padding:12px 10px;
-
   color:#8e949f;
-
   background:#0d0f13;
-
   font-size:10px;
-
   text-transform:uppercase;
-
   letter-spacing:.7px;
-
   text-align:left;
 }
 
 td{
   padding:13px 10px;
-
   border-top:1px solid #20232a;
-
   font-size:13px;
-
   vertical-align:middle;
 }
 
-.name{
-  font-weight:800;
-}
+.name{font-weight:800}
 
 .sub{
   margin-top:3px;
-
   color:#777d88;
-
   font-size:10px;
 }
 
-.phone{
-  color:#d9dde5;
-}
+.phone{color:#d9dde5}
 
 .edit{
   padding:7px 10px;
-
   color:#111;
-
   background:var(--gold2);
-
   border:0;
-
   border-radius:8px;
-
   font-size:11px;
-
   font-weight:800;
 }
 
 .empty{
   padding:28px 15px;
-
   color:#777d88;
-
   text-align:center;
-
   font-size:12px;
 }
 
-.loading{
-  opacity:.6;
-}
+.loading{opacity:.6}
 
-
-/* =========================
-   FOOTER
-========================= */
-
+/* FOOTER */
 .footer{
   margin-top:18px;
-
   color:#555b66;
-
   text-align:center;
-
   font-size:10px;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
-
+/* MOBILE */
 @media(max-width:600px){
 
   .page{
     width:min(100% - 16px,760px);
-
     padding-top:10px;
   }
 
   .hero{
     border-radius:22px;
-
     padding:25px 15px;
   }
 
   .card{
     padding:16px;
-
     border-radius:19px;
   }
 
@@ -585,9 +363,7 @@ td{
     grid-template-columns:1fr;
   }
 
-  .field.full{
-    grid-column:auto;
-  }
+  .field.full{grid-column:auto}
 
   .actions{
     grid-template-columns:1fr;
@@ -604,15 +380,9 @@ td{
 </style>
 </head>
 
-
 <body>
 
 <div class="page">
-
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header class="hero">
 
@@ -630,12 +400,6 @@ td{
   </p>
 
 </header>
-
-
-
-<!-- =========================
-     REGISTRATION FORM
-========================= -->
 
 <section class="card">
 
@@ -655,11 +419,7 @@ td{
 
   </div>
 
-
   <div class="form-grid">
-
-
-    <!-- NAME -->
 
     <div class="field">
 
@@ -676,9 +436,6 @@ td{
 
     </div>
 
-
-    <!-- PHONE -->
-
     <div class="field">
 
       <label for="phone">
@@ -694,9 +451,6 @@ td{
 
     </div>
 
-
-    <!-- LOCATION -->
-
     <div class="field full">
 
       <label for="location">
@@ -711,9 +465,7 @@ td{
 
     </div>
 
-
   </div>
-
 
   <div class="actions">
 
@@ -725,7 +477,6 @@ td{
       REGISTER MEMBER
     </button>
 
-
     <button
       class="btn secondary hidden"
       id="cancelBtn"
@@ -736,37 +487,23 @@ td{
 
   </div>
 
-
-  <div
-    id="notice"
-    class="notice"
-  ></div>
+  <div id="notice" class="notice"></div>
 
 </section>
 
-
-
-<!-- =========================
-     MEMBERS
-========================= -->
-
 <section class="card">
-
 
   <div class="section-head">
 
     <div>
 
-      <h2>
-        Family Members
-      </h2>
+      <h2>Family Members</h2>
 
       <p>
         Live online register • Automatic A–Z sorting
       </p>
 
     </div>
-
 
     <button
       class="btn secondary"
@@ -778,44 +515,25 @@ td{
 
   </div>
 
-
-
-  <!-- STATISTICS -->
-
   <div class="stats">
 
-
     <div class="stat">
 
-      <small>
-        Total Members
-      </small>
+      <small>Total Members</small>
 
-      <strong id="count">
-        0
-      </strong>
+      <strong id="count">0</strong>
 
     </div>
 
-
     <div class="stat">
 
-      <small>
-        Showing
-      </small>
+      <small>Showing</small>
 
-      <strong id="shown">
-        0
-      </strong>
+      <strong id="shown">0</strong>
 
     </div>
-
 
   </div>
-
-
-
-  <!-- SEARCH + SORT -->
 
   <div class="toolbar">
 
@@ -825,7 +543,6 @@ td{
       type="search"
       placeholder="Search name, phone or location..."
     >
-
 
     <button
       id="sortBtn"
@@ -837,10 +554,6 @@ td{
 
   </div>
 
-
-
-  <!-- TABLE -->
-
   <div class="table-wrap">
 
     <table>
@@ -848,35 +561,16 @@ td{
       <thead>
 
         <tr>
-
-          <th>
-            #
-          </th>
-
-          <th>
-            Full Names
-          </th>
-
-          <th>
-            Phone
-          </th>
-
-          <th>
-            Location
-          </th>
-
-          <th>
-            Action
-          </th>
-
+          <th>#</th>
+          <th>Full Names</th>
+          <th>Phone</th>
+          <th>Location</th>
+          <th>Action</th>
         </tr>
 
       </thead>
 
-
-      <tbody id="tb">
-
-      </tbody>
+      <tbody id="tb"></tbody>
 
     </table>
 
@@ -884,45 +578,23 @@ td{
 
 </section>
 
-
-
 <div class="footer">
-
-  A United Fardanow Family © 2026
-  • Online Registration Portal
-
+  A United Fardanow Family © 2026 • Online Registration Portal
 </div>
 
-
 </div>
-
-
 
 <script>
 
 /* ==========================================================
-   SUPABASE DATABASE CONFIGURATION
-
-   STEP 1:
-   Create your Supabase project.
-
-   STEP 2:
-   Create a table called:
-
-   fardanow_members
-
-   STEP 3:
-   Put your details below.
+   SUPABASE CONFIGURATION
 ========================================================== */
 
-
 const SUPABASE_URL =
-"PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-
+"https://yjrsnfrydfbzdmgwpgit.supabase.co";
 
 const SUPABASE_ANON_KEY =
-"PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
-
+"sb_publishable_YCFrC187ihD_c6tNk5cL7A_lRaKN9dU";
 
 const TABLE =
 "fardanow_members";
@@ -933,9 +605,7 @@ const TABLE =
 ========================================================== */
 
 let data = [];
-
 let editingId = null;
-
 let sortAscending = true;
 
 
@@ -981,77 +651,44 @@ document.getElementById("sortBtn");
 
 
 /* ==========================================================
-   CHECK DATABASE CONFIGURATION
-========================================================== */
-
-function configured(){
-
-  return (
-    !SUPABASE_URL.includes("PASTE_YOUR") &&
-    !SUPABASE_ANON_KEY.includes("PASTE_YOUR")
-  );
-
-}
-
-
-/* ==========================================================
-   DATABASE HEADERS
+   HEADERS
 ========================================================== */
 
 function headers(){
 
   return {
-
-    "apikey":
-      SUPABASE_ANON_KEY,
-
-    "Authorization":
-      "Bearer " + SUPABASE_ANON_KEY,
-
-    "Content-Type":
-      "application/json",
-
-    "Prefer":
-      "return=representation"
-
+    "apikey": SUPABASE_ANON_KEY,
+    "Authorization": "Bearer " + SUPABASE_ANON_KEY,
+    "Content-Type": "application/json",
+    "Prefer": "return=representation"
   };
 
 }
 
 
 /* ==========================================================
-   NOTIFICATION
+   NOTICE
 ========================================================== */
 
-function showNotice(
-  message,
-  type="success"
-){
+function showNotice(message,type="success"){
 
-  noticeEl.textContent =
-    message;
+  noticeEl.textContent = message;
 
   noticeEl.className =
     "notice " + type;
 
-  clearTimeout(
-    window.noticeTimer
-  );
+  clearTimeout(window.noticeTimer);
 
   window.noticeTimer =
-    setTimeout(
-      ()=>{
-        noticeEl.className =
-          "notice";
-      },
-      3500
-    );
+    setTimeout(()=>{
+      noticeEl.className = "notice";
+    },3500);
 
 }
 
 
 /* ==========================================================
-   SECURITY: ESCAPE HTML
+   ESCAPE HTML
 ========================================================== */
 
 function escapeHTML(value){
@@ -1072,7 +709,7 @@ function escapeHTML(value){
 
 
 /* ==========================================================
-   NORMALIZE SEARCH
+   NORMALIZE
 ========================================================== */
 
 function normalize(value){
@@ -1085,59 +722,54 @@ function normalize(value){
 
 
 /* ==========================================================
-   A-Z SORTING
+   SORT
 ========================================================== */
 
 function getSorted(list){
 
-  return [...list].sort(
-    (a,b)=>{
+  return [...list].sort((a,b)=>{
 
-      const result =
-        normalize(a.full_name)
-        .localeCompare(
-          normalize(b.full_name),
-          undefined,
-          {
-            numeric:true,
-            sensitivity:"base"
-          }
-        );
+    const result =
+      normalize(a.full_name)
+      .localeCompare(
+        normalize(b.full_name),
+        undefined,
+        {
+          numeric:true,
+          sensitivity:"base"
+        }
+      );
 
-
-      if(result !== 0){
-
-        return sortAscending
-          ? result
-          : -result;
-
-      }
-
-
-      const secondary =
-        normalize(a.location)
-        .localeCompare(
-          normalize(b.location),
-          undefined,
-          {
-            numeric:true,
-            sensitivity:"base"
-          }
-        );
-
+    if(result !== 0){
 
       return sortAscending
-        ? secondary
-        : -secondary;
+        ? result
+        : -result;
 
     }
-  );
+
+    const secondary =
+      normalize(a.location)
+      .localeCompare(
+        normalize(b.location),
+        undefined,
+        {
+          numeric:true,
+          sensitivity:"base"
+        }
+      );
+
+    return sortAscending
+      ? secondary
+      : -secondary;
+
+  });
 
 }
 
 
 /* ==========================================================
-   SEARCH FILTER
+   FILTER
 ========================================================== */
 
 function filteredData(){
@@ -1145,34 +777,26 @@ function filteredData(){
   const term =
     normalize(qEl.value);
 
-
   if(!term){
-
     return getSorted(data);
-
   }
-
 
   return getSorted(
 
-    data.filter(
-      member =>
+    data.filter(member =>
 
-        normalize(
-          member.full_name
-        ).includes(term)
+      normalize(member.full_name)
+        .includes(term)
 
-        ||
+      ||
 
-        normalize(
-          member.phone
-        ).includes(term)
+      normalize(member.phone)
+        .includes(term)
 
-        ||
+      ||
 
-        normalize(
-          member.location
-        ).includes(term)
+      normalize(member.location)
+        .includes(term)
 
     )
 
@@ -1182,7 +806,7 @@ function filteredData(){
 
 
 /* ==========================================================
-   RENDER MEMBERS
+   RENDER
 ========================================================== */
 
 function render(){
@@ -1190,14 +814,11 @@ function render(){
   const rows =
     filteredData();
 
-
   countEl.textContent =
     data.length;
 
-
   shownEl.textContent =
     rows.length;
-
 
   if(!rows.length){
 
@@ -1205,10 +826,7 @@ function render(){
 
       <tr>
 
-        <td
-          colspan="5"
-          class="empty"
-        >
+        <td colspan="5" class="empty">
 
           ${
             data.length
@@ -1226,142 +844,85 @@ function render(){
 
   }
 
-
   tb.innerHTML =
 
-    rows.map(
-      (member,index)=>`
-
-        <tr>
-
-          <td>
-            ${index + 1}
-          </td>
-
-
-          <td>
-
-            <div class="name">
-
-              ${escapeHTML(
-                member.full_name
-              )}
-
-            </div>
-
-
-            <div class="sub">
-
-              ${
-                member.registered_at
-                ?
-                new Date(
-                  member.registered_at
-                ).toLocaleString()
-                :
-                ""
-              }
-
-            </div>
-
-          </td>
-
-
-          <td class="phone">
-
-            ${escapeHTML(
-              member.phone || "—"
-            )}
-
-          </td>
-
-
-          <td>
-
-            ${escapeHTML(
-              member.location
-            )}
-
-          </td>
-
-
-          <td>
-
-            <button
-              class="edit"
-              onclick="startEdit('${member.id}')"
-            >
-
-              EDIT
-
-            </button>
-
-          </td>
-
-        </tr>
-
-      `
-    ).join("");
-
-}
-
-
-/* ==========================================================
-   LOAD MEMBERS FROM ONLINE DATABASE
-========================================================== */
-
-async function loadMembers(){
-
-  if(!configured()){
-
-    tb.innerHTML = `
+    rows.map((member,index)=>`
 
       <tr>
 
-        <td
-          colspan="5"
-          class="empty"
-        >
+        <td>${index + 1}</td>
 
-          Connect Supabase first by adding
-          your Project URL and anon/public key
-          in this HTML.
+        <td>
+
+          <div class="name">
+            ${escapeHTML(member.full_name)}
+          </div>
+
+          <div class="sub">
+
+            ${
+              member.registered_at
+              ?
+              new Date(
+                member.registered_at
+              ).toLocaleString()
+              :
+              ""
+            }
+
+          </div>
+
+        </td>
+
+        <td class="phone">
+
+          ${escapeHTML(member.phone || "—")}
+
+        </td>
+
+        <td>
+
+          ${escapeHTML(member.location || "—")}
+
+        </td>
+
+        <td>
+
+          <button
+            class="edit"
+            onclick="startEdit('${member.id}')"
+          >
+            EDIT
+          </button>
 
         </td>
 
       </tr>
 
-    `;
+    `).join("");
+
+}
 
 
-    countEl.textContent =
-      "—";
+/* ==========================================================
+   LOAD MEMBERS
+========================================================== */
 
-    shownEl.textContent =
-      "—";
-
-    return;
-
-  }
-
+async function loadMembers(){
 
   tb.innerHTML = `
 
     <tr>
 
-      <td
-        colspan="5"
-        class="empty loading"
-      >
+      <td colspan="5" class="empty loading">
 
-        Loading live family register...
+        Connecting to online family register...
 
       </td>
 
     </tr>
 
   `;
-
 
   try{
 
@@ -1371,12 +932,11 @@ async function loadMembers(){
         `${SUPABASE_URL}/rest/v1/${TABLE}?select=id,full_name,phone,location,registered_at,updated_at&order=full_name.asc`,
 
         {
-          headers:
-            headers()
+          method:"GET",
+          headers:headers()
         }
 
       );
-
 
     if(!response.ok){
 
@@ -1390,10 +950,8 @@ async function loadMembers(){
 
     }
 
-
     data =
       await response.json();
-
 
     render();
 
@@ -1401,24 +959,27 @@ async function loadMembers(){
 
   catch(error){
 
-    console.error(error);
-
+    console.error(
+      "Supabase error:",
+      error
+    );
 
     tb.innerHTML = `
 
       <tr>
 
-        <td
-          colspan="5"
-          class="empty"
-        >
+        <td colspan="5" class="empty">
 
-          Unable to connect to the
-          online database.
+          <strong>
+            Unable to connect to the online database.
+          </strong>
 
           <br><br>
 
-          Check your Supabase configuration.
+          Make sure the
+          <b>fardanow_members</b>
+          table exists and that the RLS policies
+          have been created.
 
         </td>
 
@@ -1426,9 +987,11 @@ async function loadMembers(){
 
     `;
 
+    countEl.textContent = "—";
+    shownEl.textContent = "—";
 
     showNotice(
-      "Database connection failed. Check your Supabase settings.",
+      "Database connection failed. Check your Supabase table and policies.",
       "error"
     );
 
@@ -1438,69 +1001,69 @@ async function loadMembers(){
 
 
 /* ==========================================================
-   REGISTER OR UPDATE MEMBER
+   SAVE / REGISTER / UPDATE
 ========================================================== */
 
 async function saveMember(){
 
-  if(!configured()){
-
-    showNotice(
-      "First connect this page to Supabase.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
   const full_name =
     namesEl.value.trim();
-
 
   const phone =
     phoneEl.value.trim();
 
-
   const location =
     locationEl.value.trim();
 
-
-  if(
-    !full_name ||
-    !phone ||
-    !location
-  ){
+  if(!full_name){
 
     showNotice(
-      "Please enter full names, phone number and location.",
+      "Please enter the member's full name.",
       "error"
     );
+
+    namesEl.focus();
 
     return;
 
   }
 
+  if(!phone){
 
-  saveBtn.disabled =
-    true;
+    showNotice(
+      "Please enter the member's phone number.",
+      "error"
+    );
 
+    phoneEl.focus();
+
+    return;
+
+  }
+
+  if(!location){
+
+    showNotice(
+      "Please enter the member's location.",
+      "error"
+    );
+
+    locationEl.focus();
+
+    return;
+
+  }
+
+  saveBtn.disabled = true;
 
   saveBtn.textContent =
     editingId
       ? "SAVING..."
       : "REGISTERING...";
 
-
   try{
 
     let response;
-
-
-    /* ======================
-       EDIT EXISTING MEMBER
-    ====================== */
 
     if(editingId){
 
@@ -1510,37 +1073,24 @@ async function saveMember(){
           `${SUPABASE_URL}/rest/v1/${TABLE}?id=eq.${encodeURIComponent(editingId)}`,
 
           {
-
             method:"PATCH",
 
-            headers:
-              headers(),
+            headers:headers(),
 
-            body:
-              JSON.stringify({
+            body:JSON.stringify({
 
-                full_name,
-                phone,
-                location,
+              full_name,
+              phone,
+              location,
+              updated_at:new Date().toISOString()
 
-                updated_at:
-                  new Date()
-                  .toISOString()
-
-              })
+            })
 
           }
 
         );
 
-    }
-
-
-    /* ======================
-       REGISTER NEW MEMBER
-    ====================== */
-
-    else{
+    }else{
 
       response =
         await fetch(
@@ -1548,20 +1098,17 @@ async function saveMember(){
           `${SUPABASE_URL}/rest/v1/${TABLE}`,
 
           {
-
             method:"POST",
 
-            headers:
-              headers(),
+            headers:headers(),
 
-            body:
-              JSON.stringify({
+            body:JSON.stringify({
 
-                full_name,
-                phone,
-                location
+              full_name,
+              phone,
+              location
 
-              })
+            })
 
           }
 
@@ -1569,11 +1116,15 @@ async function saveMember(){
 
     }
 
-
     if(!response.ok){
 
       const errorText =
         await response.text();
+
+      console.error(
+        "Supabase save error:",
+        errorText
+      );
 
       throw new Error(
         errorText ||
@@ -1582,20 +1133,17 @@ async function saveMember(){
 
     }
 
-
-    showNotice(
-
-      editingId
-        ?
-        "Member updated successfully."
-        :
-        "Member registered successfully."
-
-    );
-
+    const wasEditing =
+      Boolean(editingId);
 
     clearForm();
 
+    showNotice(
+      wasEditing
+        ? "Member updated successfully."
+        : "Member registered successfully.",
+      "success"
+    );
 
     await loadMembers();
 
@@ -1605,9 +1153,8 @@ async function saveMember(){
 
     console.error(error);
 
-
     showNotice(
-      "Could not save the member. Please try again.",
+      "Could not save the member. Check your Supabase setup and try again.",
       "error"
     );
 
@@ -1615,8 +1162,7 @@ async function saveMember(){
 
   finally{
 
-    saveBtn.disabled =
-      false;
+    saveBtn.disabled = false;
 
     saveBtn.textContent =
       editingId
@@ -1629,60 +1175,46 @@ async function saveMember(){
 
 
 /* ==========================================================
-   EDIT MEMBER
+   EDIT
 ========================================================== */
 
 function startEdit(id){
 
   const member =
     data.find(
-      item => item.id === id
+      item => String(item.id) === String(id)
     );
 
-
   if(!member){
-
     return;
-
   }
-
 
   editingId =
     id;
 
-
   namesEl.value =
     member.full_name || "";
-
 
   phoneEl.value =
     member.phone || "";
 
-
   locationEl.value =
     member.location || "";
-
 
   formTitle.textContent =
     "Edit Member";
 
-
   saveBtn.textContent =
     "SAVE CHANGES";
 
-
-  cancelBtn.classList
-    .remove("hidden");
-
+  cancelBtn.classList.remove(
+    "hidden"
+  );
 
   window.scrollTo({
-
     top:0,
-
     behavior:"smooth"
-
   });
-
 
   namesEl.focus();
 
@@ -1698,7 +1230,8 @@ function cancelEdit(){
   clearForm();
 
   showNotice(
-    "Edit cancelled."
+    "Edit cancelled.",
+    "success"
   );
 
 }
@@ -1710,38 +1243,27 @@ function cancelEdit(){
 
 function clearForm(){
 
-  editingId =
-    null;
+  editingId = null;
 
-
-  namesEl.value =
-    "";
-
-
-  phoneEl.value =
-    "";
-
-
-  locationEl.value =
-    "";
-
+  namesEl.value = "";
+  phoneEl.value = "";
+  locationEl.value = "";
 
   formTitle.textContent =
     "Register Member";
 
-
   saveBtn.textContent =
     "REGISTER MEMBER";
 
-
-  cancelBtn.classList
-    .add("hidden");
+  cancelBtn.classList.add(
+    "hidden"
+  );
 
 }
 
 
 /* ==========================================================
-   TOGGLE A-Z / Z-A
+   SORT TOGGLE
 ========================================================== */
 
 function toggleSort(){
@@ -1749,12 +1271,10 @@ function toggleSort(){
   sortAscending =
     !sortAscending;
 
-
   sortBtn.textContent =
     sortAscending
       ? "A–Z ↑"
       : "Z–A ↓";
-
 
   render();
 
@@ -1772,7 +1292,7 @@ qEl.addEventListener(
 
 
 /* ==========================================================
-   EXPORT TO EXCEL
+   EXCEL EXPORT
 ========================================================== */
 
 function exportExcel(){
@@ -1788,1981 +1308,69 @@ function exportExcel(){
 
   }
 
-
   const sorted =
     getSorted(data);
 
-
   const rows =
-    sorted.map(
-      (member,index)=>({
+    sorted.map((member,index)=>({
 
-        "No.":
-          index + 1,
+      "No.":index + 1,
 
-        "Full Names":
-          member.full_name,
+      "Full Names":
+        member.full_name,
 
-        "Phone":
-          member.phone,
+      "Phone":
+        member.phone,
 
-        "Location":
-          member.location,
+      "Location":
+        member.location,
 
-        "Date Registered":
-          member.registered_at
-            ?
-            new Date(
-              member.registered_at
-            ).toLocaleString()
-            :
-            ""
+      "Date Registered":
+        member.registered_at
+          ?
+          new Date(
+            member.registered_at
+          ).toLocaleString()
+          :
+          ""
 
-      })
-    );
-
+    }));
 
   const worksheet =
-    XLSX.utils.json_to_sheet(
-      rows
-    );
-
+    XLSX.utils.json_to_sheet(rows);
 
   worksheet["!cols"] = [
-
     {wch:8},
-
     {wch:30},
-
     {wch:20},
-
     {wch:30},
-
     {wch:25}
-
   ];
-
 
   const workbook =
     XLSX.utils.book_new();
 
-
   XLSX.utils.book_append_sheet(
-
     workbook,
-
     worksheet,
-
     "Fardanow Family"
-
   );
-
 
   const today =
     new Date()
       .toISOString()
       .slice(0,10);
 
-
   XLSX.writeFile(
-
     workbook,
-
-    `Fardanow_Family_Register_A-Z_${today}.xlsx`
-
+    `Fardanow_Family_Register_${today}.xlsx`
   );
 
 }
 
 
 /* ==========================================================
-   START APPLICATION
-========================================================== */
-
-loadMembers();
-
-</script>
-
-</body>
-  </html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08090b">
-
-<title>A United Fardanow Family — Registration</title>
-
-<!-- Excel Export Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
-<style>
-:root{
-  --bg:#08090b;
-  --panel:#111318;
-  --panel2:#17191f;
-  --line:#292c34;
-  --gold:#d4af37;
-  --gold2:#f0d878;
-  --text:#f8fafc;
-  --muted:#9ca3af;
-  --green:#22c55e;
-  --danger:#ef4444;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(212,175,55,.13),
-      transparent 35%
-    ),
-    var(--bg);
-  color:var(--text);
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
-}
-
-button,
-input{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.page{
-  width:min(100% - 24px,760px);
-  margin:0 auto;
-  padding:18px 0 35px;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-  position:relative;
-  overflow:hidden;
-  padding:30px 22px 26px;
-  text-align:center;
-
-  border:1px solid var(--line);
-  border-radius:28px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #121318,
-      #0e0f12
-    );
-
-  box-shadow:
-    0 20px 55px rgba(0,0,0,.35);
-}
-
-.hero:before{
-  content:"";
-  position:absolute;
-
-  width:220px;
-  height:220px;
-
-  border-radius:50%;
-
-  background:rgba(212,175,55,.08);
-
-  filter:blur(35px);
-
-  left:50%;
-  top:-130px;
-
-  transform:translateX(-50%);
-}
-
-.badge{
-  position:relative;
-
-  display:inline-flex;
-
-  padding:6px 11px;
-
-  border:1px solid rgba(212,175,55,.35);
-
-  border-radius:999px;
-
-  color:var(--gold2);
-
-  font-size:10px;
-  font-weight:800;
-
-  letter-spacing:1.4px;
-
-  text-transform:uppercase;
-}
-
-.hero h1{
-  position:relative;
-
-  margin:13px 0 7px;
-
-  font-size:
-    clamp(24px,6vw,38px);
-
-  line-height:1.05;
-
-  letter-spacing:-1px;
-}
-
-.hero h1 span{
-  color:var(--gold);
-}
-
-.hero p{
-  position:relative;
-
-  margin:0;
-
-  color:var(--muted);
-
-  font-size:13px;
-}
-
-
-/* =========================
-   CARDS
-========================= */
-
-.card{
-  margin-top:15px;
-
-  padding:21px;
-
-  border:1px solid var(--line);
-
-  border-radius:23px;
-
-  background:
-    rgba(17,19,24,.94);
-
-  box-shadow:
-    0 12px 35px rgba(0,0,0,.22);
-}
-
-.section-head{
-  display:flex;
-
-  justify-content:space-between;
-  align-items:center;
-
-  gap:12px;
-
-  margin-bottom:17px;
-}
-
-.section-head h2{
-  margin:0;
-
-  font-size:16px;
-}
-
-.section-head p{
-  margin:4px 0 0;
-
-  color:var(--muted);
-
-  font-size:11px;
-}
-
-
-/* =========================
-   FORM
-========================= */
-
-.form-grid{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:13px;
-}
-
-.field.full{
-  grid-column:1/-1;
-}
-
-label{
-  display:block;
-
-  margin-bottom:7px;
-
-  color:#c7cbd3;
-
-  font-size:10px;
-
-  font-weight:800;
-
-  text-transform:uppercase;
-
-  letter-spacing:.8px;
-}
-
-input{
-  width:100%;
-
-  padding:13px 14px;
-
-  color:#fff;
-
-  background:#0c0e12;
-
-  border:1px solid #30333b;
-
-  border-radius:12px;
-
-  outline:none;
-
-  transition:.2s;
-}
-
-input::placeholder{
-  color:#646a75;
-}
-
-input:focus{
-  border-color:var(--gold);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(212,175,55,.08);
-}
-
-.actions{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:10px;
-
-  margin-top:15px;
-}
-
-.btn{
-  border:0;
-
-  border-radius:12px;
-
-  padding:13px 15px;
-
-  font-weight:800;
-
-  font-size:13px;
-}
-
-.primary{
-  color:#08090b;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--gold2),
-      var(--gold)
-    );
-}
-
-.secondary{
-  color:#fff;
-
-  background:#22252c;
-
-  border:1px solid #343740;
-}
-
-.btn:disabled{
-  opacity:.55;
-
-  cursor:not-allowed;
-}
-
-.hidden{
-  display:none!important;
-}
-
-
-/* =========================
-   NOTIFICATIONS
-========================= */
-
-.notice{
-  display:none;
-
-  margin-top:13px;
-
-  padding:11px 13px;
-
-  border-radius:11px;
-
-  font-size:12px;
-
-  font-weight:700;
-}
-
-.notice.success{
-  display:block;
-
-  background:
-    rgba(34,197,94,.12);
-
-  color:#86efac;
-
-  border:
-    1px solid
-    rgba(34,197,94,.2);
-}
-
-.notice.error{
-  display:block;
-
-  background:
-    rgba(239,68,68,.10);
-
-  color:#fca5a5;
-
-  border:
-    1px solid
-    rgba(239,68,68,.2);
-}
-
-
-/* =========================
-   STATISTICS
-========================= */
-
-.stats{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:10px;
-
-  margin-bottom:14px;
-}
-
-.stat{
-  padding:13px;
-
-  border:1px solid var(--line);
-
-  border-radius:14px;
-
-  background:#0d0f13;
-}
-
-.stat small{
-  display:block;
-
-  color:var(--muted);
-
-  font-size:10px;
-
-  text-transform:uppercase;
-
-  letter-spacing:.7px;
-}
-
-.stat strong{
-  display:block;
-
-  margin-top:3px;
-
-  font-size:20px;
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-.toolbar{
-  display:flex;
-
-  gap:9px;
-
-  margin-bottom:12px;
-}
-
-.search{
-  flex:1;
-}
-
-.sort-btn{
-  white-space:nowrap;
-
-  padding:0 13px;
-
-  color:#ddd;
-
-  background:#22252c;
-
-  border:1px solid #343740;
-
-  border-radius:12px;
-
-  font-size:12px;
-
-  font-weight:800;
-}
-
-
-/* =========================
-   TABLE
-========================= */
-
-.table-wrap{
-  overflow:auto;
-
-  border:1px solid var(--line);
-
-  border-radius:15px;
-}
-
-table{
-  width:100%;
-
-  border-collapse:collapse;
-
-  min-width:620px;
-}
-
-th{
-  padding:12px 10px;
-
-  color:#8e949f;
-
-  background:#0d0f13;
-
-  font-size:10px;
-
-  text-transform:uppercase;
-
-  letter-spacing:.7px;
-
-  text-align:left;
-}
-
-td{
-  padding:13px 10px;
-
-  border-top:1px solid #20232a;
-
-  font-size:13px;
-
-  vertical-align:middle;
-}
-
-.name{
-  font-weight:800;
-}
-
-.sub{
-  margin-top:3px;
-
-  color:#777d88;
-
-  font-size:10px;
-}
-
-.phone{
-  color:#d9dde5;
-}
-
-.edit{
-  padding:7px 10px;
-
-  color:#111;
-
-  background:var(--gold2);
-
-  border:0;
-
-  border-radius:8px;
-
-  font-size:11px;
-
-  font-weight:800;
-}
-
-.empty{
-  padding:28px 15px;
-
-  color:#777d88;
-
-  text-align:center;
-
-  font-size:12px;
-}
-
-.loading{
-  opacity:.6;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-  margin-top:18px;
-
-  color:#555b66;
-
-  text-align:center;
-
-  font-size:10px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-  .page{
-    width:min(100% - 16px,760px);
-
-    padding-top:10px;
-  }
-
-  .hero{
-    border-radius:22px;
-
-    padding:25px 15px;
-  }
-
-  .card{
-    padding:16px;
-
-    border-radius:19px;
-  }
-
-  .form-grid{
-    grid-template-columns:1fr;
-  }
-
-  .field.full{
-    grid-column:auto;
-  }
-
-  .actions{
-    grid-template-columns:1fr;
-  }
-
-  .toolbar{
-    flex-direction:column;
-  }
-
-  .sort-btn{
-    height:44px;
-  }
-}
-</style>
-</head>
-
-
-<body>
-
-<div class="page">
-
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header class="hero">
-
-  <div class="badge">
-    Official Family Registration Portal
-  </div>
-
-  <h1>
-    A UNITED
-    <span>FARDANOW FAMILY</span>
-  </h1>
-
-  <p>
-    One family • One connection • One future
-  </p>
-
-</header>
-
-
-
-<!-- =========================
-     REGISTRATION FORM
-========================= -->
-
-<section class="card">
-
-  <div class="section-head">
-
-    <div>
-
-      <h2 id="formTitle">
-        Register Member
-      </h2>
-
-      <p>
-        Add a family member to the online register.
-      </p>
-
-    </div>
-
-  </div>
-
-
-  <div class="form-grid">
-
-
-    <!-- NAME -->
-
-    <div class="field">
-
-      <label for="names">
-        Full Names
-      </label>
-
-      <input
-        id="names"
-        type="text"
-        placeholder="e.g. Ahmed Fardanow"
-        autocomplete="name"
-      >
-
-    </div>
-
-
-    <!-- PHONE -->
-
-    <div class="field">
-
-      <label for="phone">
-        Members Phone
-      </label>
-
-      <input
-        id="phone"
-        type="tel"
-        placeholder="e.g. 0712 345 678"
-        autocomplete="tel"
-      >
-
-    </div>
-
-
-    <!-- LOCATION -->
-
-    <div class="field full">
-
-      <label for="location">
-        Location
-      </label>
-
-      <input
-        id="location"
-        type="text"
-        placeholder="e.g. Garissa Township, Nairobi, Mombasa"
-      >
-
-    </div>
-
-
-  </div>
-
-
-  <div class="actions">
-
-    <button
-      class="btn primary"
-      id="saveBtn"
-      onclick="saveMember()"
-    >
-      REGISTER MEMBER
-    </button>
-
-
-    <button
-      class="btn secondary hidden"
-      id="cancelBtn"
-      onclick="cancelEdit()"
-    >
-      CANCEL EDIT
-    </button>
-
-  </div>
-
-
-  <div
-    id="notice"
-    class="notice"
-  ></div>
-
-</section>
-
-
-
-<!-- =========================
-     MEMBERS
-========================= -->
-
-<section class="card">
-
-
-  <div class="section-head">
-
-    <div>
-
-      <h2>
-        Family Members
-      </h2>
-
-      <p>
-        Live online register • Automatic A–Z sorting
-      </p>
-
-    </div>
-
-
-    <button
-      class="btn secondary"
-      style="padding:9px 11px"
-      onclick="exportExcel()"
-    >
-      EXCEL
-    </button>
-
-  </div>
-
-
-
-  <!-- STATISTICS -->
-
-  <div class="stats">
-
-
-    <div class="stat">
-
-      <small>
-        Total Members
-      </small>
-
-      <strong id="count">
-        0
-      </strong>
-
-    </div>
-
-
-    <div class="stat">
-
-      <small>
-        Showing
-      </small>
-
-      <strong id="shown">
-        0
-      </strong>
-
-    </div>
-
-
-  </div>
-
-
-
-  <!-- SEARCH + SORT -->
-
-  <div class="toolbar">
-
-    <input
-      id="q"
-      class="search"
-      type="search"
-      placeholder="Search name, phone or location..."
-    >
-
-
-    <button
-      id="sortBtn"
-      class="sort-btn"
-      onclick="toggleSort()"
-    >
-      A–Z ↑
-    </button>
-
-  </div>
-
-
-
-  <!-- TABLE -->
-
-  <div class="table-wrap">
-
-    <table>
-
-      <thead>
-
-        <tr>
-
-          <th>
-            #
-          </th>
-
-          <th>
-            Full Names
-          </th>
-
-          <th>
-            Phone
-          </th>
-
-          <th>
-            Location
-          </th>
-
-          <th>
-            Action
-          </th>
-
-        </tr>
-
-      </thead>
-
-
-      <tbody id="tb">
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-</section>
-
-
-
-<div class="footer">
-
-  A United Fardanow Family © 2026
-  • Online Registration Portal
-
-</div>
-
-
-</div>
-
-
-
-<script>
-
-/* ==========================================================
-   SUPABASE DATABASE CONFIGURATION
-
-   STEP 1:
-   Create your Supabase project.
-
-   STEP 2:
-   Create a table called:
-
-   fardanow_members
-
-   STEP 3:
-   Put your details below.
-========================================================== */
-
-
-const SUPABASE_URL =
-"PASTE_YOUR_SUPABASE_PROJECT_URL_HERE";
-
-
-const SUPABASE_ANON_KEY =
-"PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
-
-
-const TABLE =
-"fardanow_members";
-
-
-/* ==========================================================
-   APPLICATION VARIABLES
-========================================================== */
-
-let data = [];
-
-let editingId = null;
-
-let sortAscending = true;
-
-
-/* ==========================================================
-   ELEMENTS
-========================================================== */
-
-const namesEl =
-document.getElementById("names");
-
-const phoneEl =
-document.getElementById("phone");
-
-const locationEl =
-document.getElementById("location");
-
-const qEl =
-document.getElementById("q");
-
-const tb =
-document.getElementById("tb");
-
-const countEl =
-document.getElementById("count");
-
-const shownEl =
-document.getElementById("shown");
-
-const noticeEl =
-document.getElementById("notice");
-
-const saveBtn =
-document.getElementById("saveBtn");
-
-const cancelBtn =
-document.getElementById("cancelBtn");
-
-const formTitle =
-document.getElementById("formTitle");
-
-const sortBtn =
-document.getElementById("sortBtn");
-
-
-/* ==========================================================
-   CHECK DATABASE CONFIGURATION
-========================================================== */
-
-function configured(){
-
-  return (
-    !SUPABASE_URL.includes("PASTE_YOUR") &&
-    !SUPABASE_ANON_KEY.includes("PASTE_YOUR")
-  );
-
-}
-
-
-/* ==========================================================
-   DATABASE HEADERS
-========================================================== */
-
-function headers(){
-
-  return {
-
-    "apikey":
-      SUPABASE_ANON_KEY,
-
-    "Authorization":
-      "Bearer " + SUPABASE_ANON_KEY,
-
-    "Content-Type":
-      "application/json",
-
-    "Prefer":
-      "return=representation"
-
-  };
-
-}
-
-
-/* ==========================================================
-   NOTIFICATION
-========================================================== */
-
-function showNotice(
-  message,
-  type="success"
-){
-
-  noticeEl.textContent =
-    message;
-
-  noticeEl.className =
-    "notice " + type;
-
-  clearTimeout(
-    window.noticeTimer
-  );
-
-  window.noticeTimer =
-    setTimeout(
-      ()=>{
-        noticeEl.className =
-          "notice";
-      },
-      3500
-    );
-
-}
-
-
-/* ==========================================================
-   SECURITY: ESCAPE HTML
-========================================================== */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(
-      /[&<>"']/g,
-      c => ({
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[c])
-    );
-
-}
-
-
-/* ==========================================================
-   NORMALIZE SEARCH
-========================================================== */
-
-function normalize(value){
-
-  return String(value ?? "")
-    .trim()
-    .toLocaleLowerCase();
-
-}
-
-
-/* ==========================================================
-   A-Z SORTING
-========================================================== */
-
-function getSorted(list){
-
-  return [...list].sort(
-    (a,b)=>{
-
-      const result =
-        normalize(a.full_name)
-        .localeCompare(
-          normalize(b.full_name),
-          undefined,
-          {
-            numeric:true,
-            sensitivity:"base"
-          }
-        );
-
-
-      if(result !== 0){
-
-        return sortAscending
-          ? result
-          : -result;
-
-      }
-
-
-      const secondary =
-        normalize(a.location)
-        .localeCompare(
-          normalize(b.location),
-          undefined,
-          {
-            numeric:true,
-            sensitivity:"base"
-          }
-        );
-
-
-      return sortAscending
-        ? secondary
-        : -secondary;
-
-    }
-  );
-
-}
-
-
-/* ==========================================================
-   SEARCH FILTER
-========================================================== */
-
-function filteredData(){
-
-  const term =
-    normalize(qEl.value);
-
-
-  if(!term){
-
-    return getSorted(data);
-
-  }
-
-
-  return getSorted(
-
-    data.filter(
-      member =>
-
-        normalize(
-          member.full_name
-        ).includes(term)
-
-        ||
-
-        normalize(
-          member.phone
-        ).includes(term)
-
-        ||
-
-        normalize(
-          member.location
-        ).includes(term)
-
-    )
-
-  );
-
-}
-
-
-/* ==========================================================
-   RENDER MEMBERS
-========================================================== */
-
-function render(){
-
-  const rows =
-    filteredData();
-
-
-  countEl.textContent =
-    data.length;
-
-
-  shownEl.textContent =
-    rows.length;
-
-
-  if(!rows.length){
-
-    tb.innerHTML = `
-
-      <tr>
-
-        <td
-          colspan="5"
-          class="empty"
-        >
-
-          ${
-            data.length
-              ? "No matching members found."
-              : "No members registered yet."
-          }
-
-        </td>
-
-      </tr>
-
-    `;
-
-    return;
-
-  }
-
-
-  tb.innerHTML =
-
-    rows.map(
-      (member,index)=>`
-
-        <tr>
-
-          <td>
-            ${index + 1}
-          </td>
-
-
-          <td>
-
-            <div class="name">
-
-              ${escapeHTML(
-                member.full_name
-              )}
-
-            </div>
-
-
-            <div class="sub">
-
-              ${
-                member.registered_at
-                ?
-                new Date(
-                  member.registered_at
-                ).toLocaleString()
-                :
-                ""
-              }
-
-            </div>
-
-          </td>
-
-
-          <td class="phone">
-
-            ${escapeHTML(
-              member.phone || "—"
-            )}
-
-          </td>
-
-
-          <td>
-
-            ${escapeHTML(
-              member.location
-            )}
-
-          </td>
-
-
-          <td>
-
-            <button
-              class="edit"
-              onclick="startEdit('${member.id}')"
-            >
-
-              EDIT
-
-            </button>
-
-          </td>
-
-        </tr>
-
-      `
-    ).join("");
-
-}
-
-
-/* ==========================================================
-   LOAD MEMBERS FROM ONLINE DATABASE
-========================================================== */
-
-async function loadMembers(){
-
-  if(!configured()){
-
-    tb.innerHTML = `
-
-      <tr>
-
-        <td
-          colspan="5"
-          class="empty"
-        >
-
-          Connect Supabase first by adding
-          your Project URL and anon/public key
-          in this HTML.
-
-        </td>
-
-      </tr>
-
-    `;
-
-
-    countEl.textContent =
-      "—";
-
-    shownEl.textContent =
-      "—";
-
-    return;
-
-  }
-
-
-  tb.innerHTML = `
-
-    <tr>
-
-      <td
-        colspan="5"
-        class="empty loading"
-      >
-
-        Loading live family register...
-
-      </td>
-
-    </tr>
-
-  `;
-
-
-  try{
-
-    const response =
-      await fetch(
-
-        `${SUPABASE_URL}/rest/v1/${TABLE}?select=id,full_name,phone,location,registered_at,updated_at&order=full_name.asc`,
-
-        {
-          headers:
-            headers()
-        }
-
-      );
-
-
-    if(!response.ok){
-
-      const errorText =
-        await response.text();
-
-      throw new Error(
-        errorText ||
-        "Unable to load members."
-      );
-
-    }
-
-
-    data =
-      await response.json();
-
-
-    render();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-
-    tb.innerHTML = `
-
-      <tr>
-
-        <td
-          colspan="5"
-          class="empty"
-        >
-
-          Unable to connect to the
-          online database.
-
-          <br><br>
-
-          Check your Supabase configuration.
-
-        </td>
-
-      </tr>
-
-    `;
-
-
-    showNotice(
-      "Database connection failed. Check your Supabase settings.",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* ==========================================================
-   REGISTER OR UPDATE MEMBER
-========================================================== */
-
-async function saveMember(){
-
-  if(!configured()){
-
-    showNotice(
-      "First connect this page to Supabase.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const full_name =
-    namesEl.value.trim();
-
-
-  const phone =
-    phoneEl.value.trim();
-
-
-  const location =
-    locationEl.value.trim();
-
-
-  if(
-    !full_name ||
-    !phone ||
-    !location
-  ){
-
-    showNotice(
-      "Please enter full names, phone number and location.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  saveBtn.disabled =
-    true;
-
-
-  saveBtn.textContent =
-    editingId
-      ? "SAVING..."
-      : "REGISTERING...";
-
-
-  try{
-
-    let response;
-
-
-    /* ======================
-       EDIT EXISTING MEMBER
-    ====================== */
-
-    if(editingId){
-
-      response =
-        await fetch(
-
-          `${SUPABASE_URL}/rest/v1/${TABLE}?id=eq.${encodeURIComponent(editingId)}`,
-
-          {
-
-            method:"PATCH",
-
-            headers:
-              headers(),
-
-            body:
-              JSON.stringify({
-
-                full_name,
-                phone,
-                location,
-
-                updated_at:
-                  new Date()
-                  .toISOString()
-
-              })
-
-          }
-
-        );
-
-    }
-
-
-    /* ======================
-       REGISTER NEW MEMBER
-    ====================== */
-
-    else{
-
-      response =
-        await fetch(
-
-          `${SUPABASE_URL}/rest/v1/${TABLE}`,
-
-          {
-
-            method:"POST",
-
-            headers:
-              headers(),
-
-            body:
-              JSON.stringify({
-
-                full_name,
-                phone,
-                location
-
-              })
-
-          }
-
-        );
-
-    }
-
-
-    if(!response.ok){
-
-      const errorText =
-        await response.text();
-
-      throw new Error(
-        errorText ||
-        "Database request failed."
-      );
-
-    }
-
-
-    showNotice(
-
-      editingId
-        ?
-        "Member updated successfully."
-        :
-        "Member registered successfully."
-
-    );
-
-
-    clearForm();
-
-
-    await loadMembers();
-
-  }
-
-  catch(error){
-
-    console.error(error);
-
-
-    showNotice(
-      "Could not save the member. Please try again.",
-      "error"
-    );
-
-  }
-
-  finally{
-
-    saveBtn.disabled =
-      false;
-
-    saveBtn.textContent =
-      editingId
-        ? "SAVE CHANGES"
-        : "REGISTER MEMBER";
-
-  }
-
-}
-
-
-/* ==========================================================
-   EDIT MEMBER
-========================================================== */
-
-function startEdit(id){
-
-  const member =
-    data.find(
-      item => item.id === id
-    );
-
-
-  if(!member){
-
-    return;
-
-  }
-
-
-  editingId =
-    id;
-
-
-  namesEl.value =
-    member.full_name || "";
-
-
-  phoneEl.value =
-    member.phone || "";
-
-
-  locationEl.value =
-    member.location || "";
-
-
-  formTitle.textContent =
-    "Edit Member";
-
-
-  saveBtn.textContent =
-    "SAVE CHANGES";
-
-
-  cancelBtn.classList
-    .remove("hidden");
-
-
-  window.scrollTo({
-
-    top:0,
-
-    behavior:"smooth"
-
-  });
-
-
-  namesEl.focus();
-
-}
-
-
-/* ==========================================================
-   CANCEL EDIT
-========================================================== */
-
-function cancelEdit(){
-
-  clearForm();
-
-  showNotice(
-    "Edit cancelled."
-  );
-
-}
-
-
-/* ==========================================================
-   CLEAR FORM
-========================================================== */
-
-function clearForm(){
-
-  editingId =
-    null;
-
-
-  namesEl.value =
-    "";
-
-
-  phoneEl.value =
-    "";
-
-
-  locationEl.value =
-    "";
-
-
-  formTitle.textContent =
-    "Register Member";
-
-
-  saveBtn.textContent =
-    "REGISTER MEMBER";
-
-
-  cancelBtn.classList
-    .add("hidden");
-
-}
-
-
-/* ==========================================================
-   TOGGLE A-Z / Z-A
-========================================================== */
-
-function toggleSort(){
-
-  sortAscending =
-    !sortAscending;
-
-
-  sortBtn.textContent =
-    sortAscending
-      ? "A–Z ↑"
-      : "Z–A ↓";
-
-
-  render();
-
-}
-
-
-/* ==========================================================
-   SEARCH
-========================================================== */
-
-qEl.addEventListener(
-  "input",
-  render
-);
-
-
-/* ==========================================================
-   EXPORT TO EXCEL
-========================================================== */
-
-function exportExcel(){
-
-  if(!data.length){
-
-    showNotice(
-      "There are no members to export.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const sorted =
-    getSorted(data);
-
-
-  const rows =
-    sorted.map(
-      (member,index)=>({
-
-        "No.":
-          index + 1,
-
-        "Full Names":
-          member.full_name,
-
-        "Phone":
-          member.phone,
-
-        "Location":
-          member.location,
-
-        "Date Registered":
-          member.registered_at
-            ?
-            new Date(
-              member.registered_at
-            ).toLocaleString()
-            :
-            ""
-
-      })
-    );
-
-
-  const worksheet =
-    XLSX.utils.json_to_sheet(
-      rows
-    );
-
-
-  worksheet["!cols"] = [
-
-    {wch:8},
-
-    {wch:30},
-
-    {wch:20},
-
-    {wch:30},
-
-    {wch:25}
-
-  ];
-
-
-  const workbook =
-    XLSX.utils.book_new();
-
-
-  XLSX.utils.book_append_sheet(
-
-    workbook,
-
-    worksheet,
-
-    "Fardanow Family"
-
-  );
-
-
-  const today =
-    new Date()
-      .toISOString()
-      .slice(0,10);
-
-
-  XLSX.writeFile(
-
-    workbook,
-
-    `Fardanow_Family_Register_A-Z_${today}.xlsx`
-
-  );
-
-}
-
-
-/* ==========================================================
-   START APPLICATION
+   START
 ========================================================== */
 
 loadMembers();
